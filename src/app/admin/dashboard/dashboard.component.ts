@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from 'src/app/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export  class DashboardComponent implements OnInit {
+
+  constructor(private dashboardService:DashboardService){
+
+  }
 
   Designation:string="";
   Username:string="";
@@ -51,29 +56,23 @@ export  class DashboardComponent implements OnInit {
     for(var i=2019;i>=2010;i--){
       this.Years.push(i);
     }
-    this.TeamMembers=[
-      {Region:"East",TeamMembersCount:20,AvailableMembers:3},
-      {Region:"West",TeamMembersCount:20,AvailableMembers:3},
-      {Region:"North",TeamMembersCount:20,AvailableMembers:3},
-      {Region:"South",TeamMembersCount:20,AvailableMembers:3},
-      
-    ];
+    this.TeamMembers=this.dashboardService.getTeamemberSummary();
     this.Regions=[
       {Direction:"East",
       Members:[
-        {id:1,name:"Akhil",status:"Avaiable"},
+        {id:1,name:"Akhil",status:"Busy"},
         {id:2,name:"Akhil",status:"Avaiable"},
         {id:3,name:"Akhil",status:"Avaiable"},
         {id:4,name:"Akhil",status:"Avaiable"},
-        {id:5,name:"Akhil",status:"Avaiable"}
+        {id:5,name:"Akhil",status:"Busy"}
       ]
       },
       {Direction:"South",
       Members:[
         {id:1,name:"Akhil",status:"Avaiable"},
-        {id:2,name:"Akhil",status:"Avaiable"},
-        {id:3,name:"Akhil",status:"Avaiable"},
-        {id:4,name:"Akhil",status:"Avaiable"},
+        {id:2,name:"Akhil",status:"Busy"},
+        {id:3,name:"Akhil",status:"Busy"},
+        {id:4,name:"Akhil",status:"Busy"},
         {id:5,name:"Akhil",status:"Avaiable"}
       ]
       },
@@ -89,14 +88,19 @@ export  class DashboardComponent implements OnInit {
       {Direction:"North",
       Members:[
         {id:1,name:"Akhil",status:"Avaiable"},
-        {id:2,name:"Akhil",status:"Avaiable"},
-        {id:3,name:"Akhil",status:"Avaiable"},
-        {id:4,name:"Akhil",status:"Avaiable"},
+        {id:2,name:"Akhil",status:"Busy"},
+        {id:3,name:"Akhil",status:"Busy"},
+        {id:4,name:"Akhil",status:"Busy"},
         {id:5,name:"Akhil",status:"Avaiable"}
       ]
       }
     ]
 
+  }
+  selectedDropdownItem: string="";
+
+  changeDropdownText($event:any): void {
+    this.selectedDropdownItem = $event.target.innerHTML;
   }
 
 }
