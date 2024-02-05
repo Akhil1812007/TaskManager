@@ -5,6 +5,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { AboutComponent } from './about/about.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { DashboardService } from '../dashboard.service';
+import { ProjectsComponent } from './projects/projects.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -12,17 +14,20 @@ import { DashboardService } from '../dashboard.service';
   declarations: [
     DashboardComponent,
     MyProfileComponent,
-    AboutComponent
+    AboutComponent,
+    ProjectsComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
+    FormsModule
     
   ],
   exports:[
     DashboardComponent,
     MyProfileComponent,
-    AboutComponent
+    AboutComponent,
+    ProjectsComponent
   ],
   providers:[
     DashboardService
