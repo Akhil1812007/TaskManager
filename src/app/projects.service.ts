@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http"
+import {HttpClient, HttpParams} from "@angular/common/http"
 import { Observable } from 'rxjs';
 import { Project } from './project';
 
@@ -15,14 +15,26 @@ export class ProjectsService {
   }
   getAllProjects():Observable<Project[]>
   {
-    return this.httpClient.get<Project[]>(this.baseUrl+"/api/projects");
+    return this.httpClient.get<Project[]>(this.baseUrl+"/api/projects",{responseType:"json"});
   }
   insertProject(newProject:Project):Observable<Project>
   {
-    return this.httpClient.post<Project>(this.baseUrl+"/api/project",newProject);
+    return this.httpClient.post<Project>(this.baseUrl+"/api/project",newProject,{responseType:"json"});
   }
   updateProject(editProject:Project):Observable<Project>
   {
-    return this.httpClient.put<Project>(this.baseUrl+"/api/project",editProject);
+    return this.httpClient.put<Project>(this.baseUrl+"/api/project/"+editProject.projectID,editProject,{responseType:"json"});
   }
+  DeleteProject(projectID:number):Observable<string>
+  {
+    return this.httpClient.delete<string>(this.baseUrl+"/api/project/"+projectID,{responseType:"json"});
+  }
+  searchProject(searchBy: string, searchText: string): Observable<Project[]> {
+    const params = new HttpParams()
+      .set('searchBy', searchBy)
+      .set('searchText', searchText);
+
+    return this.httpClient.get<Project[]>(`${this.baseUrl}/api/project/search`, { params });
+  }
+  //https://localhost:7002/api/project/search?searchBy=TeamSize&searchText=100'
 }

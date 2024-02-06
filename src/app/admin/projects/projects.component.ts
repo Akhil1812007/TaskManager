@@ -12,6 +12,12 @@ export class ProjectsComponent implements OnInit {
   newProject:Project=new Project();
   editProject:Project=new Project();
   editIndex:number=0;
+  deleteProject:Project=new Project();
+  deleteIndex:number=0;
+  searchProject:Project[]=[];
+  searchBy:string="";
+  searchText:string=""
+
   
   constructor(private projectsService:ProjectsService){
       //subscribe method create the observer 
@@ -79,6 +85,41 @@ export class ProjectsComponent implements OnInit {
 
         },
         ()=>{
+
+        }
+      )
+    }
+    onDeleteClick(event:Event,index:number){
+      this.deleteProject.projectID=this.projects[index].projectID;
+      this.deleteProject.projectName=this.projects[index].projectName;
+      
+
+      this.deleteProject.dateOfStart=this.projects[index].dateOfStart;
+    
+      
+
+    
+    
+    
+      this.deleteProject.teamSize=this.projects[index].teamSize;
+      this.deleteIndex=index;
+    }
+
+    onConfirmDelete(){
+      this.projectsService.DeleteProject(this.deleteProject.projectID).subscribe(
+        (response)=>{
+          this.projects.splice(this.deleteIndex,1);
+          
+        }
+      )
+    }
+
+    onSearchClick(){
+      this.projectsService.searchProject(this.searchBy,this.searchText).subscribe(
+        (response)=>{
+          this.projects=response;
+        },
+        (error)=>{
 
         }
       )
