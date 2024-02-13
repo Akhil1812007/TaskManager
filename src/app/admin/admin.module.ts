@@ -6,7 +6,8 @@ import { AboutComponent } from './about/about.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { DashboardService } from '../dashboard.service';
 import { ProjectsComponent } from './projects/projects.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -15,19 +16,22 @@ import { FormsModule } from '@angular/forms';
     DashboardComponent,
     MyProfileComponent,
     AboutComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    RegisterComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
     
   ],
   exports:[
     DashboardComponent,
     MyProfileComponent,
     AboutComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    RegisterComponent
   ],
   providers:[
     DashboardService
